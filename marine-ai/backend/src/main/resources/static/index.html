@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marine AI Intelligence — Console</title>
+<style>
+  :root {
+    --bg: #0e1620;
+    --panel: #16212e;
+    --panel-2: #1c2937;
+    --line: #26374a;
+    --text: #dde7f0;
+    --muted: #8ba3ba;
+    --accent: #3fa9d6;
+    --ok: #3fbf87;
+    --warn: #d9a33c;
+    --high: #e07b4a;
+    --crit: #e0574a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  h1 { margin: 0; font-size: 17px; font-weight: 600; letter-spacing: .2px; }
+  .sub { color: var(--muted); font-size: 12.5px; }
+  #health { margin-left: auto; font-size: 12.5px; color: var(--muted); }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 6px; vertical-align: 1px; }
+  .dot.up { background: var(--ok); }
+  .dot.down { background: var(--crit); }
+
+  main { padding: 24px; max-width: 1180px; margin: 0 auto; display: grid; gap: 20px; }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 18px; }
+  .panel h2 { margin: 0 0 14px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .7px; color: var(--muted); }
+
+  #drop {
+    border: 1.5px dashed var(--line);
+    border-radius: 8px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  #drop:hover, #drop.over { border-color: var(--accent); background: var(--panel-2); }
+  #drop p { margin: 0; color: var(--muted); }
+  #drop strong { color: var(--text); }
+  input[type=file] { display: none; }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .stat { background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+  .stat .v { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .stat .k { font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-top: 2px; }
+
+  .stages { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .stage { background: var(--panel-2); border: 1px solid var(--line); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--muted); }
+  .stage b { color: var(--text); font-variant-numeric: tabular-nums; }
+
+  .tablewrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { color: var(--muted); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: .5px; }
+  tbody tr:hover { background: var(--panel-2); }
+  td.num { font-variant-numeric: tabular-nums; }
+
+  .pill { display: inline-block; padding: 1px 9px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+  .r-LOW { background: rgba(63,191,135,.16); color: var(--ok); }
+  .r-MEDIUM { background: rgba(217,163,60,.16); color: var(--warn); }
+  .r-HIGH { background: rgba(224,123,74,.16); color: var(--high); }
+  .r-CRITICAL { background: rgba(224,87,74,.18); color: var(--crit); }
+  .sig { color: var(--accent); }
+
+  .muted { color: var(--muted); }
+  .err { color: var(--crit); }
+  .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  button {
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--line);
+    border-radius: 6px; padding: 7px 14px; font: inherit; font-size: 13px; cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); }
+  code { background: var(--panel-2); padding: 1px 6px; border-radius: 4px; font-size: 12.5px; }
+  .note { font-size: 12.5px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Marine AI Intelligence</h1>
+  <span class="sub">Acoustic Geometric Regularity pipeline · side-scan sonar</span>
+  <span id="health"><span class="dot"></span>checking…</span>
+</header>
+
+<main>
+
+  <section class="panel">
+    <h2>Analyse sonar imagery</h2>
+    <div id="drop">
+      <p><strong>Drop a PNG or JPG here</strong> — or click to choose a file</p>
+      <p class="sub" style="margin-top:6px">Test images: <code>marine-ai/data/synthetic/images/</code></p>
+    </div>
+    <input type="file" id="file" accept=".png,.jpg,.jpeg">
+    <div id="status" class="note"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Statistics</h2>
+    <div class="stats" id="stats"></div>
+    <div class="row" style="margin-top:14px">
+      <button id="refresh">Refresh</button>
+      <span class="muted" style="font-size:12.5px">In-memory store — counts reset when the backend restarts.</span>
+    </div>
+  </section>
+
+  <section class="panel" id="resultPanel" hidden>
+    <h2>Latest analysis · <span id="resultName" class="muted"></span></h2>
+    <div class="stages" id="stages"></div>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Class</th><th>Signature</th><th>Score</th><th>Conf</th><th>Anomaly</th><th>Risk</th><th>Size</th><th>Mesh pitch</th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <div class="note" id="resultNote"></div>
+  </section>
+
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+
+async function health() {
+  const el = $('health');
+  try {
+    const r = await fetch('/actuator/health');
+    const j = await r.json();
+    const up = j.status === 'UP';
+    el.innerHTML = '<span class="dot ' + (up ? 'up' : 'down') + '"></span>backend ' + (up ? 'UP' : j.status);
+  } catch {
+    el.innerHTML = '<span class="dot down"></span>backend unreachable';
+  }
+}
+
+async function stats() {
+  try {
+    const s = await (await fetch('/api/statistics')).json();
+    const cards = [
+      ['totalImages', 'Images analysed'],
+      ['totalDetections', 'Detections'],
+      ['highRiskCount', 'High risk'],
+      ['naturalFeaturesFiltered', 'Natural features filtered'],
+      ['averageConfidence', 'Avg confidence %']
+    ];
+    $('stats').innerHTML = cards.map(([k, label]) =>
+      '<div class="stat"><div class="v">' + (s[k] ?? 0) + '</div><div class="k">' + label + '</div></div>'
+    ).join('');
+  } catch (e) {
+    $('stats').innerHTML = '<span class="err">Could not load statistics.</span>';
+  }
+}
+
+function fmt(n, d = 2) { return typeof n === 'number' ? n.toFixed(d) : '—'; }
+
+function render(r) {
+  $('resultPanel').hidden = false;
+  $('resultName').textContent = r.sourceImage + ' · ' + r.imageWidth + '×' + r.imageHeight + ' · ' + r.analysisId;
+
+  $('stages').innerHTML = (r.stages || [])
+    .map(s => '<span class="stage">' + s.name + ' <b>' + s.ms + 'ms</b></span>').join('') +
+    '<span class="stage">total <b>' +
+      (r.stages || []).reduce((a, s) => a + s.ms, 0) + 'ms</b></span>';
+
+  const ds = r.detections || [];
+  $('rows').innerHTML = ds.length ? ds.map(d =>
+    '<tr>' +
+    '<td>' + d.id + '</td>' +
+    '<td>' + d.className + '</td>' +
+    '<td class="sig">' + d.signature + '</td>' +
+    '<td class="num">' + fmt(d.signatureScore) + '</td>' +
+    '<td class="num">' + fmt(d.confidence) + '</td>' +
+    '<td class="num">' + fmt(d.anomalyScore) + '</td>' +
+    '<td><span class="pill r-' + d.risk + '">' + d.risk + '</span></td>' +
+    '<td class="num">' + fmt(d.estimatedLengthM, 1) + ' × ' + fmt(d.estimatedWidthM, 1) + ' m</td>' +
+    '<td class="num">' + (d.meshPitchCm != null ? fmt(d.meshPitchCm, 1) + ' cm' : '—') + '</td>' +
+    '</tr>'
+  ).join('') : '<tr><td colspan="9" class="muted">No detections returned.</td></tr>';
+
+  const nets = ds.filter(d => d.signature === 'periodicity').length;
+  $('resultNote').innerHTML =
+    ds.length + ' detection(s), ' + (r.filteredOut ?? 0) + ' candidate(s) rejected as natural features. ' +
+    nets + ' classified as netting.' +
+    (r.demoMode ? ' <strong>demoMode</strong> is on — results are from the synthetic forward model.' : '');
+}
+
+async function analyse(f) {
+  if (!f) return;
+  $('status').innerHTML = 'Analysing <code>' + f.name + '</code>…';
+  const fd = new FormData();
+  fd.append('image', f);
+  try {
+    const res = await fetch('/api/analyze', { method: 'POST', body: fd });
+    const j = await res.json();
+    if (!res.ok) { $('status').innerHTML = '<span class="err">' + (j.error || res.status) + '</span>'; return; }
+    $('status').innerHTML = 'Done in ' + (j.stages || []).reduce((a, s) => a + s.ms, 0) + ' ms.';
+    render(j);
+    stats();
+  } catch (e) {
+    $('status').innerHTML = '<span class="err">Request failed: ' + e.message + '</span>';
+  }
+}
+
+const drop = $('drop');
+drop.onclick = () => $('file').click();
+$('file').onchange = e => analyse(e.target.files[0]);
+drop.ondragover = e => { e.preventDefault(); drop.classList.add('over'); };
+drop.ondragleave = () => drop.classList.remove('over');
+drop.ondrop = e => { e.preventDefault(); drop.classList.remove('over'); analyse(e.dataTransfer.files[0]); };
+$('refresh').onclick = () => { health(); stats(); };
+
+health();
+stats();
+</script>
+
+</body>
+</html>

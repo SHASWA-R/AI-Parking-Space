@@ -1,0 +1,13 @@
+{
+  "background_source": "SYNTHETIC_PROCEDURAL",
+  "synthetic": true,
+  "sonar": {
+    "altitude_m": 3.5,
+    "slant_range_max_m": 20.0,
+    "slant_res_m": 0.01953,
+    "along_track_res_m": 0.02,
+    "width": 2048,
+    "height": 1024
+  },
+  "targets": []
+}

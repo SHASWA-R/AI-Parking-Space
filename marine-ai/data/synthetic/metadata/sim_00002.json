@@ -1,0 +1,66 @@
+{
+  "background_source": "SYNTHETIC",
+  "synthetic": true,
+  "sonar": {
+    "altitude_m": 3.5,
+    "slant_range_max_m": 20.0,
+    "slant_res_m": 0.01953,
+    "along_track_res_m": 0.02,
+    "width": 2048,
+    "height": 1024
+  },
+  "targets": [
+    {
+      "style": "bundle",
+      "mesh_pitch_m": 0.0915,
+      "mesh_pitch_cm": 9.15,
+      "length_m": 5.67,
+      "width_m": 4.34,
+      "max_height_m": 1.407,
+      "orientation_deg": 127.0,
+      "centre_ground_m": 7.31,
+      "centre_along_m": 15.06,
+      "gear_type": "trawl_net",
+      "channel": "starboard",
+      "bbox_xyxy": [
+        1303,
+        598,
+        1591,
+        902
+      ],
+      "ground_res_m_per_px": 0.02165,
+      "along_res_m_per_px": 0.02,
+      "expected_pitch_px_across": 4.227,
+      "expected_pitch_px_along": 4.577,
+      "mesh_resolvable": true,
+      "samples_per_period_across": 4.23,
+      "samples_per_period_along": 4.58
+    },
+    {
+      "style": "bundle",
+      "mesh_pitch_m": 0.0201,
+      "mesh_pitch_cm": 2.01,
+      "length_m": 12.52,
+      "width_m": 4.48,
+      "max_height_m": 1.371,
+      "orientation_deg": 54.5,
+      "centre_ground_m": 12.29,
+      "centre_along_m": 6.17,
+      "gear_type": "purse_seine",
+      "channel": "starboard",
+      "bbox_xyxy": [
+        1406,
+        67,
+        1963,
+        549
+      ],
+      "ground_res_m_per_px": 0.02031,
+      "along_res_m_per_px": 0.02,
+      "expected_pitch_px_across": 0.992,
+      "expected_pitch_px_along": 1.007,
+      "mesh_resolvable": false,
+      "samples_per_period_across": 0.99,
+      "samples_per_period_along": 1.01
+    }
+  ]
+}

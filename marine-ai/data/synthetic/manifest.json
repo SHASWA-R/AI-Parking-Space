@@ -1,0 +1,21 @@
+{
+  "generator": "sss_forward_model",
+  "synthetic": true,
+  "note": "Simulated side-scan sonar. NOT real survey data. Backgrounds marked SYNTHETIC are procedural; use real SSS tiles as backgrounds for any model you intend to report results on.",
+  "n_samples": 3,
+  "seed": 42,
+  "samples": [
+    {
+      "name": "sim_00000",
+      "n_targets": 2
+    },
+    {
+      "name": "sim_00001",
+      "n_targets": 2
+    },
+    {
+      "name": "sim_00002",
+      "n_targets": 2
+    }
+  ]
+}

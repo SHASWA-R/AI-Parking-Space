@@ -1,0 +1,93 @@
+{
+  "dataset_collection": "Marine AI Operational & Benchmark Datasets",
+  "total_transects": 9,
+  "standards": [
+    "MDS Benchmark",
+    "SCTD Benchmark",
+    "Watertight ALDFG",
+    "MoES Survey Protocol"
+  ],
+  "samples": [
+    {
+      "id": "mds_00001",
+      "name": "mds_00001.png",
+      "title": "MDS Benchmark \u2014 Cylindrical Oil Drum & Mooring Cable",
+      "category": "benchmark",
+      "n_targets": 2,
+      "imagePath": "/samples/mds_00001.png",
+      "metadataPath": "/samples/mds_00001.json"
+    },
+    {
+      "id": "sctd_00002",
+      "name": "sctd_00002.png",
+      "title": "SCTD Benchmark \u2014 Subsea Cargo Container & Pipeline",
+      "category": "benchmark",
+      "n_targets": 2,
+      "imagePath": "/samples/sctd_00002.png",
+      "metadataPath": "/samples/sctd_00002.json"
+    },
+    {
+      "id": "watertight_00003",
+      "name": "watertight_00003.png",
+      "title": "Watertight ALDFG \u2014 Multi-Layered Trawl & Purse Net",
+      "category": "benchmark",
+      "n_targets": 2,
+      "imagePath": "/samples/watertight_00003.png",
+      "metadataPath": "/samples/watertight_00003.json"
+    },
+    {
+      "id": "moes_lakshadweep_001",
+      "name": "moes_lakshadweep_001.png",
+      "title": "Lakshadweep Transect 01 \u2014 Draped Commercial Trawl Net",
+      "category": "operational",
+      "n_targets": 2,
+      "imagePath": "/samples/moes_lakshadweep_001.png",
+      "metadataPath": "/samples/moes_lakshadweep_001.json"
+    },
+    {
+      "id": "moes_mannar_002",
+      "name": "moes_mannar_002.png",
+      "title": "Gulf of Mannar Transect 02 \u2014 High-Density Snagged Gillnet",
+      "category": "operational",
+      "n_targets": 2,
+      "imagePath": "/samples/moes_mannar_002.png",
+      "metadataPath": "/samples/moes_mannar_002.json"
+    },
+    {
+      "id": "moes_goa_003",
+      "name": "moes_goa_003.png",
+      "title": "Goa Coastal Transect 03 \u2014 55-Gal Steel Drum & Synthetic Line",
+      "category": "operational",
+      "n_targets": 2,
+      "imagePath": "/samples/moes_goa_003.png",
+      "metadataPath": "/samples/moes_goa_003.json"
+    },
+    {
+      "id": "moes_mumbai_004",
+      "name": "moes_mumbai_004.png",
+      "title": "Mumbai Offshore Transect 04 \u2014 Energy Pipeline & Cargo Crate",
+      "category": "operational",
+      "n_targets": 2,
+      "imagePath": "/samples/moes_mumbai_004.png",
+      "metadataPath": "/samples/moes_mumbai_004.json"
+    },
+    {
+      "id": "moes_andaman_005",
+      "name": "moes_andaman_005.png",
+      "title": "Andaman Trench Transect 05 \u2014 Deep Fine-Mesh Net Bundle",
+      "category": "operational",
+      "n_targets": 1,
+      "imagePath": "/samples/moes_andaman_005.png",
+      "metadataPath": "/samples/moes_andaman_005.json"
+    },
+    {
+      "id": "moes_palk_006",
+      "name": "moes_palk_006.png",
+      "title": "Palk Strait Transect 06 \u2014 Natural Reef Baseline (0% FP)",
+      "category": "operational",
+      "n_targets": 0,
+      "imagePath": "/samples/moes_palk_006.png",
+      "metadataPath": "/samples/moes_palk_006.json"
+    }
+  ]
+}

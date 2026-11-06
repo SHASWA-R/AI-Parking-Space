@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build Outputs
+dist/
+build/
+target/
+out/
+*.class
+*.jar
+*.war
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Logs & temp
+*.log
+tmp/
+temp/
+
+# Environment Variables
+.env
+.env.local
+
+# IDE & Editor files
+.idea/
+.agents/
+.claude/
+
+# OS generated files
+.DS_Store
+Thumbs.db

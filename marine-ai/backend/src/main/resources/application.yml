@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: marine-ai
+  servlet:
+    multipart:
+      max-file-size: 32MB
+      max-request-size: 64MB
+
+marine:
+  cors:
+    allowed-origins: "http://localhost:5173,http://localhost:3000"
+
+  # Sonar acquisition geometry. Defaults model a high-frequency,
+  # short-range survey. Mesh signature detection requires this: a
+  # standard 100 m range survey samples the seabed at 10-15 cm per
+  # pixel, at which no fishing net mesh is resolvable at all.
+  sonar:
+    altitude-m: 3.5
+    slant-range-max-m: 20.0
+    along-track-res-m: 0.02
+
+  # Signature thresholds, calibrated against simulator ground truth.
+  signature:
+    mesh-pitch-min-m: 0.020
+    mesh-pitch-max-m: 0.180
+    mesh-strength-threshold: 1.6
+    min-samples-per-period: 2.5
+    shape-smooth-sigma: 1.2
+    periodicity-override: 0.45
+    reject-margin: 0.10
+
+  # Anomaly score weights. These signals MUST stay independent -- if
+  # confidence were derived from shadow or texture the weighted sum
+  # would be circular and meaningless.
+  scoring:
+    weight-confidence: 0.35
+    weight-signature: 0.25
+    weight-shadow: 0.25
+    weight-texture: 0.15
+    risk-low-max: 30
+    risk-medium-max: 60
+    risk-high-max: 80
+
+logging:
+  level:
+    com.marineai: INFO
